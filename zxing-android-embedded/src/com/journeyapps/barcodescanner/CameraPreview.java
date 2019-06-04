@@ -376,6 +376,11 @@ public class CameraPreview extends ViewGroup {
         int height = containerSize.height;
 
         surfaceRect = displayConfiguration.scalePreview(previewSize);
+        if(surfaceRect.width() == 0 || surfaceRect.height() == 0){ //Previene el error Divide by zero de algun samsung
+            previewFramingRect = null;
+            framingRect = null;
+            return;
+        }
 
         Rect container = new Rect(0, 0, width, height);
         framingRect = calculateFramingRect(container, surfaceRect);
